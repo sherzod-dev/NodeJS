@@ -14,7 +14,6 @@ app.get("/bye", function(req, res){
 
 app.get("/dog", function(req, res){
   console.log("Someone made a request to /dog");
-  res.setHeader('Content-type', 'text/plain');
   res.send("<b>M</b>eow!");
 });
 
