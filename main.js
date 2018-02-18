@@ -17,6 +17,6 @@ app.get("/dog", function(req, res){
 });
 
 //comment
-app.listen(3000, '0.0.0.0', function(){
+app.listen(80, '0.0.0.0', function(){
   console.log("server has started!!!");
 });
