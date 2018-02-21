@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>Ed Sheeran - Shape of You</title>
+    <!--<link rel="stylesheet" href="demo.css" type="text/css">-->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/highlight.js/8.6/styles/default.min.css">
+    <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/highlight.js/8.6/styles/tomorrow.min.css">
+    <link rel="stylesheet" href="files/style.css">
+
+    <script src="scripts.js"></script>
+</head>
+<!--<body  class="bod" bgcolor="#EEEEEE">-->
+  <body class="bod">
+
+  <table border="0" style="border-collapse: collapse; width: 100%;" class="bod">
+  <tbody>
+  <tr>
+  <td style="width: 20%; text-align: center;"></td>
+    <td style="width: 60%; ">
+    <table border="0" style="border-collapse: collapse; width: 100%; height: 25px; align="center"" >
+    <tbody>
+    <tr>
+
+<td></td>
+    <td class="en_btn" ><a href="javascript:on_english();" class="en_btn" id="entxt">ENG</a></td>
+    <td  width="2px" style="color:#000000; text-align:center; "></td>
+
+    <td class="uz_btn"><a href="javascript:on_uzbek();" class="uz_btn" id="uztxt">UZB</a></td>
+    <td  width="2px" style="color:#000000; text-align:center;"></td>
+
+    <td class="ru_btn"><a href="javascript:on_russian();" class="ru_btn" id="rutxt">RUS</a></td>
+<td></td>
+    </tr>
+    </tbody>
+    </table>
+     </td>
+  <td style="width: 20%; ">
+
+  </td>
+  </tr>
+  </tbody>
+  </table>
+
+   
+
+<table border="0" id="vid_tablejs" class="vid_table" >
+<tbody>
+<tr id="table_height" style="height: 500px;">
+<td style="width: 100%;"  align="center";> <div  id="video-placeholder" ></div></td>
+</tr>
+<tr style="height: 120px;">
+
+<!--<td style="width: 50%; background-color: rgba(0, 0, 0, 0.5);">-->
+  <td style="width: 50%; background-color: rgba(0, 0, 0, 0.2);">
+
+        
+        <table style="height: 10px; width: 347px; margin-left: auto; margin-right: auto;">
+            <tbody>
+                    <tr>
+                            <td style="width: 18.5px;"></td>
+                                <td style="width: 285.5px; text-align: center;">
+                                        <span class="range_txt">Volume of microphone</span>
+                                </td>
+                            <td style="width: 37px;"></td>
+                        </tr>
+                <tr>
+                    <td style="width: 18.5px;"><span class="range_txt">0&nbsp;&nbsp;</span></td>
+                        <td style="width: 285.5px; text-align: center;">
+                                <input id="volume" type="range" min="0" max="1" step="0.1" value="0.5"/>
+                        </td>
+                    <td style="width: 37px;"><span class="range_txt">&nbsp;&nbsp;100</span></td>
+                </tr>
+            </tbody>
+        </table>
+       
+        
+   
+
+</tr>
+<tr>
+<td style="width: 100%; height: 20px;"></td>
+</tr>
+
+
+</tbody>
+</table>
+
+
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+<script src="http://cdnjs.cloudflare.com/ajax/libs/highlight.js/8.6/highlight.min.js"></script>
+<script src="https://www.youtube.com/iframe_api"></script>
+
+
+<script>
+
+//video_id from youtube
+var vid_id = '0T0isRnJrSY';
+
+var caps_en= []
+
+
+var caps_uz= [];
+var caps_ru= [];
+
+
+if(caps_ru.length===0) {
+  document.getElementById("rutxt").style.textDecoration = "line-through";
+  document.getElementById("rutxt").style.color = "#94989A";
+}
+if(caps_uz.length===0) {
+  document.getElementById("uztxt").style.color = "#94989A";
+  document.getElementById("uztxt").style.textDecoration = "line-through";
+}
+
+
+
+var subs1 = caps_en;
+var subs2 = caps_uz;
+var subs_empty = [""];
+var ensubs="on";
+var uzsubs="on";
+var rusubs="off";
+
+function on_english(){
+  if(ensubs=="on")
+  {
+    ensubs="off";
+    subs1 = subs_empty;
+    document.getElementById("entxt").style.color = "#94989A";
+
+  }
+    else
+    {
+      ensubs="on";
+      subs1 = caps_en;
+      document.getElementById("entxt").style.color = "#ECECEC";
+    }
+}
+
+function on_uzbek(){
+  if(uzsubs=="on")
+  {
+    uzsubs="off";
+    subs2 = subs_empty;
+    document.getElementById("uztxt").style.color = "#94989A";
+
+  }
+    else
+    {
+      uzsubs="on";
+      rusubs="off";
+      subs2 = caps_uz;
+      document.getElementById("uztxt").style.color = "#ECECEC";
+      document.getElementById("rutxt").style.color = "#94989A";
+    }
+}
+
+function on_russian(){
+  if(rusubs=="on")
+  {
+    rusubs="off";
+    subs2 = subs_empty;
+    document.getElementById("rutxt").style.color = "#94989A";
+
+  }
+    else
+    {
+      rusubs="on";
+      uzsubs="off";
+      subs2 = caps_ru;
+      document.getElementById("rutxt").style.color = "#ECECEC";
+      document.getElementById("uztxt").style.color = "#94989A";
+    }
+}
+
+
+
+
+var player,
+time_update_interval = 0;
+
+
+var width_window = window.innerWidth;
+var video_width = 850;
+var video_height = 480;
+
+//changing window size
+if(width_window<video_width)
+{
+  video_width = width_window;
+  video_height = video_width / 1.77;
+  document.getElementById("sec_en").style.fontSize = "medium";
+  document.getElementById("sec_uz").style.fontSize = "small";
+  document.getElementById("sec_ru").style.fontSize = "small";
+}
+//table height
+
+
+
+
+function onYouTubeIframeAPIReady() {
+    document.getElementById('table_height').style.height = (Math.round(video_height+25)).toString() + "px";
+    document.getElementById('vid_tablejs').style.height = (Math.round(video_height)).toString() + "px";
+
+    player = new YT.Player('video-placeholder', {
+        //width: 800,
+        width: video_width,
+        height: video_height,
+        videoId: vid_id,
+        playerVars: {
+            color: 'white',
+            //playlist: 'taJ60kskkns,FG0fTKAqZ5g'
+        },
+        events: {
+            onReady: initialize
+        }
+    });
+}
+
+
+function initialize(){
+
+    // Update the controls on load
+    updateTimerDisplay();
+    updateProgressBar();
+
+    // Clear any old interval.
+    clearInterval(time_update_interval);
+
+    // Start interval to update elapsed time display and
+    // the elapsed part of the progress bar every second.
+    time_update_interval = setInterval(function () {
+        updateTimerDisplay();
+        updateProgressBar();
+    }, 1000);
+
+
+    $('#volume-input').val(Math.round(player.getVolume()));
+}
+
+
+// This function is called by initialize()
+function updateTimerDisplay(){
+    // Update current time text display.
+    $('#current-time').text(formatTime( player.getCurrentTime() ));
+    $('#duration').text(formatTime( player.getDuration() ));
+
+
+
+    //censura--censura--censura--censura--censura--censura--
+    if(player.getCurrentTime()>=7.3&&player.getCurrentTime()<=8.5)
+    player.seekTo(8.5);
+      /*player.mute();
+    else
+      player.unMute();*/
+
+
+
+    var str = String(subs1[Math.floor(player.getCurrentTime())]);
+    if(str!="undefined")
+      document.getElementById('sec_en').innerHTML = str;
+    else
+      document.getElementById('sec_en').innerHTML = "  ";
+
+  //subs for uz
+          var st = String(subs2[Math.floor(player.getCurrentTime())]);
+          if(st!="undefined")
+            document.getElementById('sec_uz').innerHTML = st;
+          else
+            document.getElementById('sec_uz').innerHTML = "  ";
+}
+
+
+// This function is called by initialize()
+function updateProgressBar(){
+    // Update the value of our progress bar accordingly.
+    $('#progress-bar').val((player.getCurrentTime() / player.getDuration()) * 100);
+}
+
+
+// Progress bar
+
+$('#progress-bar').on('mouseup touchend', function (e) {
+
+    // Calculate the new time for the video.
+    // new time in seconds = total duration in seconds * ( value of range input / 100 )
+    var newTime = player.getDuration() * (e.target.value / 100);
+
+    // Skip video to new time.
+    player.seekTo(newTime);
+
+});
+
+
+// Playback
+
+$('#play').on('click', function () {
+    player.playVideo();
+});
+
+
+$('#pause').on('click', function () {
+    player.pauseVideo();
+});
+
+
+// Sound volume
+
+
+$('#mute-toggle').on('click', function() {
+    var mute_toggle = $(this);
+
+    if(player.isMuted()){
+        player.unMute();
+        mute_toggle.text('volume_up');
+    }
+    else{
+        player.mute();
+        mute_toggle.text('volume_off');
+    }
+});
+
+$('#volume-input').on('change', function () {
+    player.setVolume($(this).val());
+});
+
+
+// Other options
+
+
+$('#speed').on('change', function () {
+    player.setPlaybackRate($(this).val());
+});
+
+$('#quality').on('change', function () {
+    player.setPlaybackQuality($(this).val());
+});
+
+
+// Playlist
+
+$('#next').on('click', function () {
+    player.nextVideo()
+});
+
+$('#prev').on('click', function () {
+    player.previousVideo()
+});
+
+
+// Load video
+
+$('.thumbnail').on('click', function () {
+
+    var url = $(this).attr('data-video-id');
+
+    player.cueVideoById(url);
+
+});
+
+
+// Helper Functions
+
+function formatTime(time){
+    time = Math.round(time);
+
+    var minutes = Math.floor(time / 60),
+        seconds = time - minutes * 60;
+
+    seconds = seconds < 10 ? '0' + seconds : seconds;
+
+    return minutes + ":" + seconds;
+}
+
+
+$('pre code').each(function(i, block) {
+    hljs.highlightBlock(block);
+});
+
+
+
+</script>
+
+
+<!-- Demo ads. Please ignore and remove. -->
+
+</body>
+</html>

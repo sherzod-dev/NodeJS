@@ -1,0 +1,237 @@
+
+@font-face {
+    font-family: for_audio_font;
+    src: url("OpenSans-Regular.ttf");
+}
+
+@font-face {
+    font-family: for_audio_font_light;
+    src: url("OpenSans-Light.ttf");
+}
+
+@font-face {
+    font-family: for_audio_font_bold;
+    src: url("OpenSans-Bold.ttf");
+}
+
+
+.title{
+  margin-top: 5px;
+  margin-bottom: 0;
+  align="center";
+  font-weight: normal;
+  font-family: for_audio_font_light;
+  line-height: 1.2;
+  text-align: center;
+  color:#ECECEC;
+
+}
+
+
+
+.subs_en{
+  font-weight: normal;
+  line-height: 1.2;
+  font-family: for_audio_font;
+  text-align: center;
+  font-size:32px;
+  color:#FFF;
+  margin: 10px 0 0 0;
+  letter-spacing: 0.01em;
+}
+
+
+.subs_uz{
+  font-weight: normal;
+  line-height: 1.2;
+  font-family: for_audio_font_light;
+  text-align: center;
+  font-size:26px;
+  color:#FFF200;
+  margin: 10px 0 0 0;
+  letter-spacing: 0.05em;
+}
+
+.bod{
+  margin:0; padding:0;
+  background: #17406C;
+  background-image: url("music_bg.png");
+
+/* background-image: url("fon4.gif");*/
+
+}
+.vid_table{
+  background: #17406C;
+  background-image: url("music_bg.png");
+  border-collapse: collapse;
+  width: 100%;
+}
+
+
+
+
+.txt_en{
+  font-weight: normal;
+  line-height: 1.2;
+  font-family: for_audio_font;
+  text-align: center;
+  font-size:22px;
+  color:#2980BE;
+  margin: 10px  0 0;
+  letter-spacing: 0.01em;
+}
+
+.txt_uz{
+  font-weight: normal;
+  line-height: 1.2;
+  font-family: for_audio_font;
+  text-align: left;
+  font-size:22px;
+  color:#FF7F27;
+  margin: 10px 0 0 0;
+  letter-spacing: 0.01em;
+}
+
+
+/* SUBTITLE BUTTONS*/
+
+.en_btn{
+  font-size: 20px;
+  text-decoration:none;
+  width: 60px;
+  color: #ECECEC;
+  font-family: for_audio_font;
+  letter-spacing: 3px;
+}
+.ru_btn{
+  font-size: 20px;
+  text-decoration:none;
+  color: #94989A;
+  font-family: for_audio_font;
+  width: 60px;
+  letter-spacing: 3px;
+}
+.uz_btn{
+  font-size: 20px;
+  color:#ECECEC;
+  text-decoration:none;
+  font-family: for_audio_font;
+  width: 60px;
+  letter-spacing: 3px;
+}
+
+.uz_btn:hover{
+  text-decoration: underline;
+  cursor: pointer;
+  width: 60px;
+}
+.ru_btn:hover{
+  text-decoration: underline;
+  cursor: pointer;
+  width: 60px;
+}
+.en_btn:hover{
+  text-decoration: underline;
+  cursor: pointer;
+  width: 60px;
+}
+
+.range_txt{
+  text-align: center;
+  font-family: for_audio_font;
+  color: #FDFDFB;
+  
+}
+
+
+
+/* RANGE DESIGN*/
+input[type=range] {
+  /*removes default webkit styles*/
+  -webkit-appearance: none;
+  
+  /*fix for FF unable to apply focus style bug */
+  border: 1px solid white;
+  
+  /*required for proper track sizing in FF*/
+  width: 300px;
+}
+input[type=range]::-webkit-slider-runnable-track {
+  width: 300px;
+  height: 5px;
+  background: #ddd;
+  border: none;
+  border-radius: 3px;
+}
+input[type=range]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  border: none;
+  height: 16px;
+  width: 16px;
+  border-radius: 50%;
+  background: goldenrod;
+  margin-top: -4px;
+}
+input[type=range]:focus {
+  outline: none;
+}
+input[type=range]:focus::-webkit-slider-runnable-track {
+  background: #ccc;
+}
+
+input[type=range]::-moz-range-track {
+  width: 300px;
+  height: 5px;
+  background: #ddd;
+  border: none;
+  border-radius: 3px;
+}
+input[type=range]::-moz-range-thumb {
+  border: none;
+  height: 16px;
+  width: 16px;
+  border-radius: 50%;
+  background: goldenrod;
+}
+
+/*hide the outline behind the border*/
+input[type=range]:-moz-focusring{
+  outline: 1px solid white;
+  outline-offset: -1px;
+}
+
+input[type=range]::-ms-track {
+  width: 300px;
+  height: 5px;
+  
+  /*remove bg colour from the track, we'll use ms-fill-lower and ms-fill-upper instead */
+  background: transparent;
+  
+  /*leave room for the larger thumb to overflow with a transparent border */
+  border-color: transparent;
+  border-width: 6px 0;
+
+  /*remove default tick marks*/
+  color: transparent;
+}
+input[type=range]::-ms-fill-lower {
+  background: #777;
+  border-radius: 10px;
+}
+input[type=range]::-ms-fill-upper {
+  background: #ddd;
+  border-radius: 10px;
+}
+input[type=range]::-ms-thumb {
+  border: none;
+  height: 16px;
+  width: 16px;
+  border-radius: 50%;
+  background: goldenrod;
+}
+input[type=range]:focus::-ms-fill-lower {
+  background: #888;
+}
+input[type=range]:focus::-ms-fill-upper {
+  background: #ccc;
+}
